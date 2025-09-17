@@ -1,10 +1,12 @@
-export const authConfig = [
+import { OpenIdConfiguration } from 'angular-auth-oidc-client';
+
+export const authConfig: OpenIdConfiguration[] = [
   {
     configId: 'portal',
     authority: 'http://localhost:8080/realms/chronomed-patient',
     clientId: 'chronomed',
     redirectUrl: window.location.origin,
-    postLogoutRedirectUri: window.location.origin + '/portal',
+    postLogoutRedirectUri: window.location.origin,
     scope: 'openid profile email offline_access',
     responseType: 'code',
     silentRenew: true,
@@ -14,7 +16,7 @@ export const authConfig = [
     configId: 'staff',
     authority: 'http://localhost:8080/realms/chronomed-staff',
     clientId: 'chronomed',
-    redirectUrl: window.location.origin + '/staff',
+    redirectUrl: window.location.origin,
     postLogoutRedirectUri: window.location.origin,
     scope: 'openid profile email offline_access',
     responseType: 'code',
