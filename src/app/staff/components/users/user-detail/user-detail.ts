@@ -4,6 +4,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { Role, User } from '../../../../core/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chip } from '../../../../shared/ui/chip/chip';
+import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -20,6 +21,7 @@ export class UserDetail {
   userService = inject(UserService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  private toastService = inject(ToastService);
 
   user: User | null = null;
   roles!: Role[];
@@ -73,12 +75,14 @@ export class UserDetail {
     };
     if (this.user) {
       this.userService.updateUser(this.user.id!, userEntity).subscribe(_ => {
+        this.toastService.success('User updated successfully.');
         void this.router.navigate(['..'], {relativeTo: this.route});
       });
     } else {
       this.userService.createUser(userEntity).subscribe(_ => {
-        // TODO: send to ../{id}/account
         void this.router.navigate(['..'], {relativeTo: this.route});
+        this.toastService.success('User created successfully.');
+        // TODO: go to ../{id}/account
         // void this.router.navigate(['../' + res.id + '/account'], {relativeTo: this.route});
       });
     }
