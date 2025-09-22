@@ -3,7 +3,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { User } from '../../../../core/models/user.model';
 import { NgStyle } from '@angular/common';
 import { PaginatedResponse } from '../../../../core/models/response.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -11,15 +11,17 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   imports: [
     NgStyle,
     ReactiveFormsModule,
+    RouterLink,
   ],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css'
 })
 export class UserList {
-  paginatedResponse!: PaginatedResponse<User>;
   userService = inject(UserService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+
+  paginatedResponse!: PaginatedResponse<User>;
   searchQueryControl: FormControl<string> = new FormControl(this.route.snapshot.queryParams['search'] === undefined ? '' : this.route.snapshot.queryParams['search'].toString());
   currentPage: number = this.route.snapshot.queryParams['page'] === undefined ? 1 : parseInt(this.route.snapshot.queryParams['page']);
 

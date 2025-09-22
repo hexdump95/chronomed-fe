@@ -1,0 +1,43 @@
+<h1>User info</h1>
+@if (roles) {
+  <div>
+    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+      <div class="input-wrapper">
+        <span class="input-text">CUIL</span>
+        <input class="input-field" formControlName="username" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">First Name</span>
+        <input class="input-field" formControlName="firstName" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Last Name</span>
+        <input class="input-field" formControlName="lastName" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Email</span>
+        <input class="input-field" formControlName="email" type="email">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Enabled</span>
+        <input class="input-field" formControlName="enabled" type="checkbox">
+      </div>
+
+      <select formArrayName="roles" (change)="updateRole($event)">
+        <option [defaultSelected]="true"></option>
+        @for (role of roles; track role.id) {
+          <option [value]="role.id">{{ role.name }}</option>
+        }
+      </select>
+
+      <br>
+      @for (roleId of getSelectedRoles(); track roleId) {
+        <app-chip [label]="getRoleName(roleId)" (removed)="removeTag(roleId)"></app-chip>
+      }
+      <br>
+
+      <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">Accept</button>
+    </form>
+  </div>
+}

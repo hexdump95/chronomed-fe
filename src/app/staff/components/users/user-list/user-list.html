@@ -1,4 +1,4 @@
-<button class="btn btn-primary">Create new User</button>
+<button routerLink="./new" class="btn btn-primary">Create new User</button>
 <div class="input-wrapper">
   <span class="input-text">Search: </span>
   <input class="input-field" [formControl]="searchQueryControl" type="search">
@@ -17,7 +17,7 @@
     @if (paginatedResponse) {
       @for (user of paginatedResponse.items; track user.id) {
         <tr [ngStyle]="{'text-decoration': user.enabled ? 'none' : 'line-through'}">
-          <td>{{ user.username }}</td>
+          <td><a routerLink="./{{user.id}}">{{ user.username }}</a></td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
