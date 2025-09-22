@@ -1,0 +1,47 @@
+<h1>Account info</h1>
+<button type="button" routerLink='../'>User details</button>
+
+@if (account) {
+  <div>
+    <form [formGroup]="accountFormGroup" (ngSubmit)="onSubmit()">
+      <div class="input-wrapper">
+        <span class="input-text">Phone number</span>
+        <input class="input-field" formControlName="phoneNumber" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">File number</span>
+        <input class="input-field" formControlName="fileNumber" type="text">
+      </div>
+
+      <select (change)="updateFacility($event)">
+        <option [defaultSelected]="true"></option>
+        @for (facility of facilities; track facility.id) {
+          <option [value]="facility.id">{{ facility.name }}</option>
+        }
+      </select>
+
+      <br>
+      @for (facilityId of getSelectedFacilities(); track facilityId) {
+        <app-chip [label]="getFacilityName(facilityId)" (removed)="removeFacilityTag(facilityId)"></app-chip>
+      }
+      <br>
+
+      <select (change)="updateSpecialty($event)">
+        <option [defaultSelected]="true"></option>
+        @for (specialty of specialties; track specialty.id) {
+          <option [value]="specialty.id">{{ specialty.name }}</option>
+        }
+      </select>
+
+      <br>
+      @for (specialtyId of getSelectedSpecialties(); track specialtyId) {
+        <app-chip [label]="getSpecialtyName(specialtyId)" (removed)="removeSpecialtyTag(specialtyId)"></app-chip>
+      }
+      <br>
+
+
+      <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+  </div>
+}

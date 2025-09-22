@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../../core/services/user.service';
 import { Role, User } from '../../../../core/models/user.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Chip } from '../../../../shared/ui/chip/chip';
 import { ToastService } from '../../../../core/services/toast.service';
 
@@ -12,6 +12,7 @@ import { ToastService } from '../../../../core/services/toast.service';
     ReactiveFormsModule,
     FormsModule,
     Chip,
+    RouterLink,
   ],
   templateUrl: './user-detail.html',
   styleUrl: './user-detail.css'
@@ -79,11 +80,9 @@ export class UserDetail {
         void this.router.navigate(['..'], {relativeTo: this.route});
       });
     } else {
-      this.userService.createUser(userEntity).subscribe(_ => {
-        void this.router.navigate(['..'], {relativeTo: this.route});
+      this.userService.createUser(userEntity).subscribe(res => {
         this.toastService.success('User created successfully.');
-        // TODO: go to ../{id}/account
-        // void this.router.navigate(['../' + res.id + '/account'], {relativeTo: this.route});
+        void this.router.navigate(['../' + res.id + '/account'], {relativeTo: this.route});
       });
     }
   }

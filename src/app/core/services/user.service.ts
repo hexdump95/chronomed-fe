@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Role, User } from '../models/user.model';
+import { Account, Role, User } from '../models/user.model';
 import { PaginatedResponse } from '../models/response.model';
 
 @Injectable({
@@ -38,5 +38,13 @@ export class UserService {
 
   updateUser(id: string, request: User): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${id}`, request);
+  }
+
+  getAccount(id: string): Observable<Account> {
+    return this.http.get<Account>(`${this.apiUrl}/${id}/account`);
+  }
+
+  updateAccount(id: string, request: Account): Observable<Account> {
+    return this.http.put<Account>(`${this.apiUrl}/${id}/account`, request);
   }
 }

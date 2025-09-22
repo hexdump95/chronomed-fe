@@ -1,4 +1,7 @@
 <h1>User info</h1>
+@if (user) {
+  <button type="button" routerLink='./account'>Account details</button>
+}
 @if (roles) {
   <div>
     <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
@@ -23,7 +26,7 @@
         <input class="input-field" formControlName="enabled" type="checkbox">
       </div>
 
-      <select formArrayName="roles" (change)="updateRole($event)">
+      <select (change)="updateRole($event)">
         <option [defaultSelected]="true"></option>
         @for (role of roles; track role.id) {
           <option [value]="role.id">{{ role.name }}</option>
@@ -37,7 +40,7 @@
       <br>
 
       <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
-      <button class="btn btn-primary" type="submit">Accept</button>
+      <button class="btn btn-primary" type="submit">{{ user !== null ? 'Update' : 'Create' }}</button>
     </form>
   </div>
 }

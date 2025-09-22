@@ -13,3 +13,11 @@ export interface Role {
   id: string;
   name: string;
 }
+
+export interface Account {
+  id?: string;
+  phoneNumber: string;
+  fileNumber: string;
+  facilityIds: number[];
+  specialtyIds: number[];
+}
