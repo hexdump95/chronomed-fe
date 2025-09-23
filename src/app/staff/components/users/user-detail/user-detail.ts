@@ -26,13 +26,13 @@ export class UserDetail {
 
   user: User | null = null;
   roles!: Role[];
+  selectedRoleIds: string[] = [];
   userFormGroup: FormGroup = this.fb.group({
     username: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', Validators.required],
     enabled: [true, Validators.required],
-    roles: ['', Validators.required],
   });
 
   ngOnInit() {
@@ -41,14 +41,13 @@ export class UserDetail {
       if (this.route.snapshot.params['id'] != undefined) {
         this.userService.getStaffUser(this.route.snapshot.params['id']).subscribe(res => {
             this.user = res;
-            let userRoles = res.roles!.map(x => x.id).toString().split(',');
+            this.selectedRoleIds = res.roles!.map(r => r.id);
             this.userFormGroup.patchValue({
               username: res.username,
               firstName: res.firstName,
               lastName: res.lastName,
               email: res.email,
               enabled: res.enabled,
-              roles: userRoles.toString(),
             });
           }
         );
@@ -61,9 +60,8 @@ export class UserDetail {
   }
 
   onSubmit() {
-    const selectedRoleIds: string = this.userFormGroup.value.roles;
     const selectedRoles = this.roles.filter(role =>
-      selectedRoleIds.includes(role.id)
+      this.selectedRoleIds.includes(role.id)
     );
     const userEntity: User = {
       username: this.userFormGroup.value.username,
@@ -87,36 +85,19 @@ export class UserDetail {
     }
   }
 
-  getUserFormRoles(): string {
-    return this.userFormGroup.get('roles')?.value ?? '';
-  }
-
-  getSelectedRoles(): string[] {
-    return this.stringToArray(this.getUserFormRoles().toString());
-  }
-
   getRoleName(roleId: string) {
     return this.roles.filter(role => role.id === roleId).map(role => role.name).toString();
   }
 
-  stringToArray(string: string) {
-    return string.toString().split(',').filter(str => str !== '');
-  }
-
   updateRole(event: any) {
-    let roles: string[] = this.stringToArray(this.getUserFormRoles().toString());
-    if (!roles.includes(event.target.value)) {
-      roles.push(event.target.value);
+    if (event.target.value === '') return;
+    if (!this.selectedRoleIds.includes(event.target.value)) {
+      this.selectedRoleIds.push(event.target.value);
     }
-    const rolesString = roles.join(',');
-    this.userFormGroup.get('roles')?.setValue(rolesString);
   }
 
   removeTag(roleId: string) {
-    let roles: string[] = this.stringToArray(this.getUserFormRoles().toString());
-    roles = roles.filter(id => id !== roleId);
-    const rolesString = roles.join(',');
-    this.userFormGroup.get('roles')?.setValue(rolesString);
+    this.selectedRoleIds = this.selectedRoleIds.filter(id => id !== roleId);
   }
 
 }

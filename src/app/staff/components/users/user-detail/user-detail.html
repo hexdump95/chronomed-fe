@@ -34,7 +34,7 @@
       </select>
 
       <br>
-      @for (roleId of getSelectedRoles(); track roleId) {
+      @for (roleId of selectedRoleIds; track roleId) {
         <app-chip [label]="getRoleName(roleId)" (removed)="removeTag(roleId)"></app-chip>
       }
       <br>

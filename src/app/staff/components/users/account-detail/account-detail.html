@@ -21,7 +21,7 @@
       </select>
 
       <br>
-      @for (facilityId of getSelectedFacilities(); track facilityId) {
+      @for (facilityId of selectedFacilityIds; track facilityId) {
         <app-chip [label]="getFacilityName(facilityId)" (removed)="removeFacilityTag(facilityId)"></app-chip>
       }
       <br>
@@ -34,7 +34,7 @@
       </select>
 
       <br>
-      @for (specialtyId of getSelectedSpecialties(); track specialtyId) {
+      @for (specialtyId of selectedSpecialtyIds; track specialtyId) {
         <app-chip [label]="getSpecialtyName(specialtyId)" (removed)="removeSpecialtyTag(specialtyId)"></app-chip>
       }
       <br>

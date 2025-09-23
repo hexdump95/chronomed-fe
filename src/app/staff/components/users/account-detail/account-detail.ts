@@ -6,7 +6,7 @@ import { forkJoin } from 'rxjs';
 import { UserService } from '../../../../core/services/user.service';
 import { Specialty } from '../../../../core/models/specialty.model';
 import { Facility } from '../../../../core/models/facility.model';
-import { Account, User } from '../../../../core/models/user.model';
+import { Account } from '../../../../core/models/user.model';
 import { Chip } from '../../../../shared/ui/chip/chip';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '../../../../core/services/toast.service';
@@ -33,12 +33,12 @@ export class AccountDetail {
 
   facilities: Facility[] = [];
   specialties: Specialty[] = [];
+  selectedFacilityIds: number[] = [];
+  selectedSpecialtyIds: number[] = [];
   account!: Account;
   accountFormGroup: FormGroup = this.fb.group({
     phoneNumber: ['', Validators.required],
     fileNumber: ['', Validators.required],
-    facilityIds: ['', Validators.required],
-    specialtyIds: ['', Validators.required],
   });
 
   ngOnInit() {
@@ -52,14 +52,13 @@ export class AccountDetail {
         this.specialties = res.specialties;
         this.account = res.account;
 
-        let accountFacilities = res.account.facilityIds.toString().split(',');
-        let accountSpecialties = res.account.specialtyIds.toString().split(',');
         this.accountFormGroup.patchValue({
           phoneNumber: res.account.phoneNumber,
           fileNumber: res.account.fileNumber,
-          facilityIds: accountFacilities.toString(),
-          specialtyIds: accountSpecialties.toString(),
         });
+
+        this.selectedFacilityIds = res.account.facilityIds;
+        this.selectedSpecialtyIds = res.account.specialtyIds;
       },
       error: (_) => {
       }
@@ -71,14 +70,11 @@ export class AccountDetail {
   }
 
   onSubmit() {
-    const selectedFacilityIds: string = this.accountFormGroup.value.facilityIds;
-    const selectedSpecialtyIds: string = this.accountFormGroup.value.specialtyIds;
-
     const accountEntity: Account = {
       phoneNumber: this.accountFormGroup.value.phoneNumber,
       fileNumber: this.accountFormGroup.value.fileNumber,
-      facilityIds: selectedFacilityIds.split(',').map(x => parseInt(x)),
-      specialtyIds: selectedSpecialtyIds.split(',').map(x => parseInt(x)),
+      facilityIds: this.selectedFacilityIds,
+      specialtyIds: this.selectedSpecialtyIds,
     };
 
     this.userService.updateAccount(this.account.id!, accountEntity).subscribe(_ => {
@@ -87,44 +83,23 @@ export class AccountDetail {
     });
   }
 
-  stringToArray(string: string) {
-    return string.toString().split(',').map(x => parseInt(x)).filter(x => !isNaN(x));
-  }
-
-  getUserFormFacilities(): string {
-    return this.accountFormGroup.get('facilityIds')?.value ?? '';
-  }
-
-  getSelectedFacilities(): number[] {
-    return this.stringToArray(this.getUserFormFacilities().toString());
-  }
-
   getFacilityName(facilityId: number) {
-    return this.facilities.filter(facility => facility.id === facilityId).map(facility => facility.name).toString();
+    return this.facilities
+      .filter(facility => facility.id === facilityId)
+      .map(facility => facility.name)
+      .toString();
   }
 
   updateFacility(event: any) {
-    let facilities: number[] = this.stringToArray(this.getUserFormFacilities().toString());
-    if (!facilities.includes(event.target.value)) {
-      facilities.push(event.target.value);
+    if (event.target.value === '') return;
+    const value = parseInt(event.target.value);
+    if (!this.selectedFacilityIds.includes(value)) {
+      this.selectedFacilityIds.push(value);
     }
-    const facilitiesString = facilities.join(',');
-    this.accountFormGroup.get('facilityIds')?.setValue(facilitiesString);
   }
 
   removeFacilityTag(facilityId: number) {
-    let facilities: number[] = this.stringToArray(this.getUserFormFacilities().toString());
-    facilities = facilities.filter(id => id !== facilityId);
-    const facilitiesString = facilities.join(',');
-    this.accountFormGroup.get('facilityIds')?.setValue(facilitiesString);
-  }
-
-  getUserFormSpecialties(): string {
-    return this.accountFormGroup.get('specialtyIds')?.value ?? '';
-  }
-
-  getSelectedSpecialties(): number[] {
-    return this.stringToArray(this.getUserFormSpecialties().toString());
+    this.selectedFacilityIds = this.selectedFacilityIds.filter(id => id !== facilityId);
   }
 
   getSpecialtyName(specialtyId: number) {
@@ -132,20 +107,15 @@ export class AccountDetail {
   }
 
   updateSpecialty(event: any) {
-    let specialties: number[] = this.stringToArray(this.getUserFormSpecialties().toString());
-    if (!specialties.includes(event.target.value)) {
-      specialties.push(event.target.value);
+    if (event.target.value === '') return;
+    const value = parseInt(event.target.value);
+    if (!this.selectedSpecialtyIds.includes(value)) {
+      this.selectedSpecialtyIds.push(value);
     }
-    const specialtiesString = specialties.join(',');
-    this.accountFormGroup.get('specialtyIds')?.setValue(specialtiesString);
   }
 
   removeSpecialtyTag(specialtyId: number) {
-    let specialties: number[] = this.stringToArray(this.getUserFormSpecialties().toString());
-    specialties = specialties.filter(id => id !== specialtyId);
-    const specialtiesString = specialties.join(',');
-    this.accountFormGroup.get('specialtyIds')?.setValue(specialtiesString);
+    this.selectedSpecialtyIds = this.selectedSpecialtyIds.filter(id => id !== specialtyId);
   }
-
 
 }
