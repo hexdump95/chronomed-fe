@@ -4,7 +4,7 @@ import { SpecialtyService } from '../../../../core/services/specialty.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Dialog } from '@angular/cdk/dialog';
-import { SpecialtyPriceDialog } from '../specialty-price-dialog/specialty-price-dialog';
+import { SpecialtyPriceFormDialog } from '../specialty-price-form-dialog/specialty-price-form-dialog';
 
 @Component({
   selector: 'app-specialty-detail',
@@ -31,7 +31,7 @@ export class SpecialtyDetail {
   }
 
   openCreateSpecialtyPriceDialog() {
-    this.dialog.open<SpecialtyPrice>(SpecialtyPriceDialog, {
+    this.dialog.open<SpecialtyPrice>(SpecialtyPriceFormDialog, {
       minWidth: '300px',
       data: {
         specialtyId: this.specialty.id

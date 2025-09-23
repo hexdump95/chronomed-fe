@@ -6,14 +6,14 @@ import { SpecialtyPrice } from '../../../../core/models/specialty.model';
 import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-specialty-price-dialog',
+  selector: 'app-specialty-price-form-dialog',
   imports: [
     ReactiveFormsModule
   ],
-  templateUrl: './specialty-price-dialog.html',
-  styleUrl: './specialty-price-dialog.css'
+  templateUrl: './specialty-price-form-dialog.html',
+  styleUrl: './specialty-price-form-dialog.css'
 })
-export class SpecialtyPriceDialog {
+export class SpecialtyPriceFormDialog {
   fb = inject(FormBuilder);
   specialtyService = inject(SpecialtyService);
   toastService = inject(ToastService);
