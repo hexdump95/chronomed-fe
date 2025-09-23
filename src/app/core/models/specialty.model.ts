@@ -6,7 +6,7 @@ export interface Specialty {
 }
 
 export interface SpecialtyPrice {
-  id: number;
+  id?: number;
   validFrom: string;
   validTo: string;
   price: number;

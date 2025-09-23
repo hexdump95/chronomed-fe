@@ -19,3 +19,26 @@
   color: #fff;
   background-color: #2A4252;
 }
+
+.dialog {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.dialog-title {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.btn-dialog-close {
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 32px;
+  height: 32px;
+}

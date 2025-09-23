@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Specialty } from '../models/specialty.model';
+import { Specialty, SpecialtyPrice } from '../models/specialty.model';
 import { PaginatedResponse } from '../models/response.model';
 
 @Injectable({
@@ -39,6 +39,10 @@ export class SpecialtyService {
 
   updateSpecialty(id: number, request: Specialty): Observable<Specialty> {
     return this.http.put<Specialty>(`${this.apiUrl}/${id}`, request);
+  }
+
+  createSpecialtyPrice(specialtyId: number, request: SpecialtyPrice): Observable<SpecialtyPrice> {
+    return this.http.post<SpecialtyPrice>(`${this.apiUrl}/${specialtyId}/prices`, request);
   }
 
 }

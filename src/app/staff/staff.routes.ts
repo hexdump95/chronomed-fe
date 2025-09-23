@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { Staff } from './staff';
 import { UserList } from './components/users/user-list/user-list';
-import { UserDetail } from './components/users/user-detail/user-detail';
-import { AccountDetail } from './components/users/account-detail/account-detail';
+import { UserForm } from './components/users/user-form/user-form';
+import { AccountForm } from './components/users/account-form/account-form';
 import { SpecialtyList } from './components/specialties/specialty-list/specialty-list';
+import { SpecialtyDetail } from './components/specialties/specialty-detail/specialty-detail';
+import { SpecialtyForm } from './components/specialties/specialty-form/specialty-form';
 
 const staffRoutes: Routes = [
   {
@@ -16,19 +18,31 @@ const staffRoutes: Routes = [
   },
   {
     path: 'users/new',
-    component: UserDetail
+    component: UserForm
   },
   {
     path: 'users/:id',
-    component: UserDetail
+    component: UserForm
   },
   {
     path: 'users/:id/account',
-    component: AccountDetail
+    component: AccountForm
   },
   {
     path: 'specialties',
     component: SpecialtyList
+  },
+  {
+    path: 'specialties/new',
+    component: SpecialtyForm
+  },
+  {
+    path: 'specialties/:id',
+    component: SpecialtyDetail
+  },
+  {
+    path: 'specialties/:id/edit',
+    component: SpecialtyForm
   },
 ];
 

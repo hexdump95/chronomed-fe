@@ -2,11 +2,11 @@
   <h1>{{ specialty.name }}</h1>
   <h2>{{ specialty.description }}</h2>
   <br>
-  <button routerLink='./edit'>Edit</button>
+  <button routerLink='./edit' type="button">Edit</button>
   <br>
   <br>
   <p>Price history:</p>
-  <button type="button">Add new Price</button>
+  <button (click)="openCreateSpecialtyPriceDialog()" type="button">Add new Price</button>
   <table>
     <thead>
     <tr>
