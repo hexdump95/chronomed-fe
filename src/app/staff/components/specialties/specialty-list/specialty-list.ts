@@ -5,13 +5,15 @@ import { PaginatedResponse } from '../../../../core/models/response.model';
 import { SpecialtyService } from '../../../../core/services/specialty.service';
 import { Specialty } from '../../../../core/models/specialty.model';
 import { PaginationService } from '../../../../core/services/pagination.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { SpecialtyDeleteDialog } from '../specialty-delete-dialog/specialty-delete-dialog';
 
 @Component({
   selector: 'app-specialty-list',
   imports: [
     FormsModule,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './specialty-list.html',
   styleUrl: './specialty-list.css'
@@ -21,6 +23,7 @@ export class SpecialtyList {
   route = inject(ActivatedRoute);
   router = inject(Router);
   paginationService = inject(PaginationService);
+  dialog = inject(Dialog);
 
   paginatedResponse!: PaginatedResponse<Specialty>;
   searchQueryControl: FormControl<string> = new FormControl(this.route.snapshot.queryParams['search'] === undefined ? '' : this.route.snapshot.queryParams['search'].toString());
@@ -41,5 +44,19 @@ export class SpecialtyList {
 
   filterPage() {
     this.goToPage(1);
+  }
+
+  openDeleteSpecialtyDialog(specialty: Specialty) {
+    this.dialog.open<boolean>(SpecialtyDeleteDialog, {
+      minWidth: '300px',
+      data: {
+        specialty: specialty
+      },
+      disableClose: true,
+    }).closed.subscribe(res => {
+      if (res) {
+        this.goToPage(this.currentPage);
+      }
+    });
   }
 }

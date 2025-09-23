@@ -41,6 +41,10 @@ export class SpecialtyService {
     return this.http.put<Specialty>(`${this.apiUrl}/${id}`, request);
   }
 
+  deleteSpecialty(id: number): Observable<null> {
+    return this.http.delete<null>(`${this.apiUrl}/${id}`);
+  }
+
   createSpecialtyPrice(specialtyId: number, request: SpecialtyPrice): Observable<SpecialtyPrice> {
     return this.http.post<SpecialtyPrice>(`${this.apiUrl}/${specialtyId}/prices`, request);
   }
