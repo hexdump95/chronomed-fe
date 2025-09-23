@@ -7,17 +7,17 @@ import { Chip } from '../../../../shared/ui/chip/chip';
 import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-user-detail',
+  selector: 'app-user-form',
   imports: [
     ReactiveFormsModule,
     FormsModule,
     Chip,
     RouterLink,
   ],
-  templateUrl: './user-detail.html',
-  styleUrl: './user-detail.css'
+  templateUrl: './user-form.html',
+  styleUrl: './user-form.css'
 })
-export class UserDetail {
+export class UserForm {
   fb = inject(FormBuilder);
   userService = inject(UserService);
   route = inject(ActivatedRoute);

@@ -12,17 +12,17 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-account-detail',
+  selector: 'app-account-form',
   imports: [
     RouterLink,
     Chip,
     FormsModule,
     ReactiveFormsModule
   ],
-  templateUrl: './account-detail.html',
-  styleUrl: './account-detail.css'
+  templateUrl: './account-form.html',
+  styleUrl: './account-form.css'
 })
-export class AccountDetail {
+export class AccountForm {
   fb = inject(FormBuilder);
   facilityService = inject(FacilityService);
   specialtyService = inject(SpecialtyService);
