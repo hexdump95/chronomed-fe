@@ -33,4 +33,12 @@ export class SpecialtyService {
     return this.http.get<Specialty>(`${this.apiUrl}/${id}`);
   }
 
+  createSpecialty(request: Specialty): Observable<Specialty> {
+    return this.http.post<Specialty>(`${this.apiUrl}`, request);
+  }
+
+  updateSpecialty(id: number, request: Specialty): Observable<Specialty> {
+    return this.http.put<Specialty>(`${this.apiUrl}/${id}`, request);
+  }
+
 }

@@ -1,8 +1,8 @@
 export interface Specialty {
-  id: number;
+  id?: number;
   name: string;
   description?: string;
-  specialtyPrices: SpecialtyPrice[];
+  specialtyPrices?: SpecialtyPrice[];
 }
 
 export interface SpecialtyPrice {

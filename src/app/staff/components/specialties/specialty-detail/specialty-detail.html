@@ -1,6 +1,10 @@
 @if (specialty) {
   <h1>{{ specialty.name }}</h1>
   <h2>{{ specialty.description }}</h2>
+  <br>
+  <button routerLink='./edit'>Edit</button>
+  <br>
+  <br>
   <p>Price history:</p>
   <button type="button">Add new Price</button>
   <table>
