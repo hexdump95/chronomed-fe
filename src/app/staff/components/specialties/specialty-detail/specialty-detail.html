@@ -1,0 +1,30 @@
+@if (specialty) {
+  <h1>{{ specialty.name }}</h1>
+  <h2>{{ specialty.description }}</h2>
+  <p>Price history:</p>
+  <button type="button">Add new Price</button>
+  <table>
+    <thead>
+    <tr>
+      <td>Valid from</td>
+      <td>Valid to</td>
+      <td>Price</td>
+    </tr>
+    </thead>
+    <tbody>
+      @for (price of specialty.specialtyPrices; track price.id) {
+        <tr>
+          <td>{{ price.validFrom | date: 'y-mm-dd' }}</td>
+          <td>{{ price.validTo | date: 'y-mm-dd' }}</td>
+          <td>{{ price.price | currency }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3">
+            There are no items.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

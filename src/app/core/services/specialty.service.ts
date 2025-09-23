@@ -29,4 +29,8 @@ export class SpecialtyService {
     return this.http.get<Specialty[]>(`${this.apiUrl}/all`);
   }
 
+  getSpecialty(id: number): Observable<Specialty> {
+    return this.http.get<Specialty>(`${this.apiUrl}/${id}`);
+  }
+
 }
