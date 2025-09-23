@@ -1,0 +1,36 @@
+<button routerLink="./new" class="btn btn-primary">Create new Specialty</button>
+<div class="input-wrapper">
+  <span class="input-text">Search: </span>
+  <input class="input-field" [formControl]="searchQueryControl" type="search">
+  <button class="btn" (click)="filterPage()">Filter</button>
+</div>
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+  </tr>
+  </thead>
+  <tbody>
+    @if (paginatedResponse) {
+      @for (specialty of paginatedResponse.items; track specialty.id) {
+        <tr>
+          <td><a routerLink="./{{specialty.id}}">{{ specialty.name }}</a></td>
+          <td>{{ specialty.description }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="2">
+            There are no items.
+          </td>
+        </tr>
+      }
+    } @else {
+      <tr>
+        <td colspan="2">
+          There are no items.
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

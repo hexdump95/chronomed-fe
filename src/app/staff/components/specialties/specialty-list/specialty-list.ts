@@ -1,29 +1,28 @@
 import { Component, inject } from '@angular/core';
-import { UserService } from '../../../../core/services/user.service';
-import { User } from '../../../../core/models/user.model';
-import { NgStyle } from '@angular/common';
-import { PaginatedResponse } from '../../../../core/models/response.model';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { PaginatedResponse } from '../../../../core/models/response.model';
+import { SpecialtyService } from '../../../../core/services/specialty.service';
+import { Specialty } from '../../../../core/models/specialty.model';
 import { PaginationService } from '../../../../core/services/pagination.service';
 
 @Component({
-  selector: 'app-user-list',
+  selector: 'app-specialty-list',
   imports: [
-    NgStyle,
-    ReactiveFormsModule,
+    FormsModule,
     RouterLink,
+    ReactiveFormsModule
   ],
-  templateUrl: './user-list.html',
-  styleUrl: './user-list.css'
+  templateUrl: './specialty-list.html',
+  styleUrl: './specialty-list.css'
 })
-export class UserList {
-  userService = inject(UserService);
+export class SpecialtyList {
+  specialtyService = inject(SpecialtyService);
   route = inject(ActivatedRoute);
   router = inject(Router);
   paginationService = inject(PaginationService);
 
-  paginatedResponse!: PaginatedResponse<User>;
+  paginatedResponse!: PaginatedResponse<Specialty>;
   searchQueryControl: FormControl<string> = new FormControl(this.route.snapshot.queryParams['search'] === undefined ? '' : this.route.snapshot.queryParams['search'].toString());
   currentPage: number = this.route.snapshot.queryParams['page'] === undefined ? 1 : parseInt(this.route.snapshot.queryParams['page']);
 
@@ -33,7 +32,7 @@ export class UserList {
 
   goToPage(page: number) {
     this.currentPage = page;
-    this.userService.getStaffUsers(this.searchQueryControl.value, page)
+    this.specialtyService.getSpecialties(this.searchQueryControl.value, page)
       .subscribe(paginatedResponse => {
         this.paginatedResponse = paginatedResponse;
         this.paginationService.updateQueryParams(this.currentPage, this.searchQueryControl.value);
