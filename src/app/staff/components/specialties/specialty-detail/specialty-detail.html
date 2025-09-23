@@ -14,8 +14,8 @@
     <tbody>
       @for (price of specialty.specialtyPrices; track price.id) {
         <tr>
-          <td>{{ price.validFrom | date: 'y-mm-dd' }}</td>
-          <td>{{ price.validTo | date: 'y-mm-dd' }}</td>
+          <td>{{ price.validFrom | date: 'y-MM-dd' }}</td>
+          <td>{{ price.validTo | date: 'y-MM-dd' }}</td>
           <td>{{ price.price | currency }}</td>
         </tr>
       } @empty {
