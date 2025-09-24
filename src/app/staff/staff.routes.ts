@@ -6,6 +6,7 @@ import { AccountForm } from './components/users/account-form/account-form';
 import { SpecialtyList } from './components/specialties/specialty-list/specialty-list';
 import { SpecialtyDetail } from './components/specialties/specialty-detail/specialty-detail';
 import { SpecialtyForm } from './components/specialties/specialty-form/specialty-form';
+import { ComorbidityList } from './components/comorbidities/comorbidity-list/comorbidity-list';
 
 const staffRoutes: Routes = [
   {
@@ -43,6 +44,10 @@ const staffRoutes: Routes = [
   {
     path: 'specialties/:id/edit',
     component: SpecialtyForm
+  },
+  {
+    path: 'comorbidities',
+    component: ComorbidityList
   },
 ];
 
