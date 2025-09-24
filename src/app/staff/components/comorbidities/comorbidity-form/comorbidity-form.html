@@ -1,0 +1,17 @@
+<h1>Comorbidity info</h1>
+
+<div>
+  <form [formGroup]="comorbidityFormGroup" (ngSubmit)="onSubmit()">
+    <div class="input-wrapper">
+      <span class="input-text">Name</span>
+      <input class="input-field" formControlName="name" type="text">
+    </div>
+    <div class="input-wrapper">
+      <span class="input-text">Description</span>
+      <textarea formControlName="description"></textarea>
+    </div>
+
+    <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+    <button class="btn btn-primary" type="submit">{{ comorbidityId !== null ? 'Update' : 'Create' }}</button>
+  </form>
+</div>
