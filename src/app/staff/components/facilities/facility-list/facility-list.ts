@@ -7,6 +7,7 @@ import { Facility } from '../../../../core/models/facility.model';
 import { PaginationService } from '../../../../core/services/pagination.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { FacilityDeleteDialog } from '../facility-delete-dialog/facility-delete-dialog';
+import { Pagination } from '../../../../shared/ui/pagination/pagination';
 
 @Component({
   selector: 'app-facility-list',
@@ -14,6 +15,7 @@ import { FacilityDeleteDialog } from '../facility-delete-dialog/facility-delete-
     FormsModule,
     RouterLink,
     ReactiveFormsModule,
+    Pagination,
   ],
   templateUrl: './facility-list.html',
   styleUrl: './facility-list.css'
@@ -28,6 +30,7 @@ export class FacilityList {
   paginatedResponse!: PaginatedResponse<Facility>;
   searchQueryControl: FormControl<string> = new FormControl(this.route.snapshot.queryParams['search'] === undefined ? '' : this.route.snapshot.queryParams['search'].toString());
   currentPage: number = this.route.snapshot.queryParams['page'] === undefined ? 1 : parseInt(this.route.snapshot.queryParams['page']);
+  pageSize: number = 10;
 
   ngOnInit() {
     this.goToPage(this.currentPage);
@@ -44,6 +47,10 @@ export class FacilityList {
 
   filterPage() {
     this.goToPage(1);
+  }
+
+  onPageChanged(page: number) {
+    this.goToPage(page);
   }
 
   openDeleteFacilityDialog(facility: Facility) {

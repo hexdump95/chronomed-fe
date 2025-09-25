@@ -6,6 +6,7 @@ import { PaginatedResponse } from '../../../../core/models/response.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PaginationService } from '../../../../core/services/pagination.service';
+import { Pagination } from '../../../../shared/ui/pagination/pagination';
 
 @Component({
   selector: 'app-user-list',
@@ -13,6 +14,7 @@ import { PaginationService } from '../../../../core/services/pagination.service'
     NgStyle,
     ReactiveFormsModule,
     RouterLink,
+    Pagination,
   ],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css'
@@ -26,6 +28,7 @@ export class UserList {
   paginatedResponse!: PaginatedResponse<User>;
   searchQueryControl: FormControl<string> = new FormControl(this.route.snapshot.queryParams['search'] === undefined ? '' : this.route.snapshot.queryParams['search'].toString());
   currentPage: number = this.route.snapshot.queryParams['page'] === undefined ? 1 : parseInt(this.route.snapshot.queryParams['page']);
+  pageSize: number = 10;
 
   ngOnInit() {
     this.goToPage(this.currentPage);
@@ -42,5 +45,9 @@ export class UserList {
 
   filterPage() {
     this.goToPage(1);
+  }
+
+  onPageChanged(page: number) {
+    this.goToPage(page);
   }
 }

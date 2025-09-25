@@ -38,3 +38,12 @@
     }
   </tbody>
 </table>
+
+@if (paginatedResponse) {
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalItems]="paginatedResponse.totalItems"
+    [itemsPerPage]="pageSize"
+    (pageChanged)="onPageChanged($event)">
+  </app-pagination>
+}

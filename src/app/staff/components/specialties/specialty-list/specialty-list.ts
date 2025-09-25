@@ -5,6 +5,7 @@ import { PaginatedResponse } from '../../../../core/models/response.model';
 import { SpecialtyService } from '../../../../core/services/specialty.service';
 import { Specialty } from '../../../../core/models/specialty.model';
 import { PaginationService } from '../../../../core/services/pagination.service';
+import { Pagination } from '../../../../shared/ui/pagination/pagination';
 import { Dialog } from '@angular/cdk/dialog';
 import { SpecialtyDeleteDialog } from '../specialty-delete-dialog/specialty-delete-dialog';
 
@@ -14,6 +15,7 @@ import { SpecialtyDeleteDialog } from '../specialty-delete-dialog/specialty-dele
     FormsModule,
     RouterLink,
     ReactiveFormsModule,
+    Pagination
   ],
   templateUrl: './specialty-list.html',
   styleUrl: './specialty-list.css'
@@ -28,6 +30,7 @@ export class SpecialtyList {
   paginatedResponse!: PaginatedResponse<Specialty>;
   searchQueryControl: FormControl<string> = new FormControl(this.route.snapshot.queryParams['search'] === undefined ? '' : this.route.snapshot.queryParams['search'].toString());
   currentPage: number = this.route.snapshot.queryParams['page'] === undefined ? 1 : parseInt(this.route.snapshot.queryParams['page']);
+  pageSize: number = 10;
 
   ngOnInit() {
     this.goToPage(this.currentPage);
@@ -44,6 +47,10 @@ export class SpecialtyList {
 
   filterPage() {
     this.goToPage(1);
+  }
+
+  onPageChanged(page: number) {
+    this.goToPage(page);
   }
 
   openDeleteSpecialtyDialog(specialty: Specialty) {

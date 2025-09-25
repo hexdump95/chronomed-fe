@@ -7,6 +7,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { ComorbidityService } from '../../../../core/services/comorbidity.service';
 import { Comorbidity } from '../../../../core/models/comorbidity.model';
 import { ComorbidityDeleteDialog } from '../comorbidity-delete-dialog/comorbidity-delete-dialog';
+import { Pagination } from '../../../../shared/ui/pagination/pagination';
 
 @Component({
   selector: 'app-comorbidity-list',
@@ -14,6 +15,7 @@ import { ComorbidityDeleteDialog } from '../comorbidity-delete-dialog/comorbidit
     FormsModule,
     RouterLink,
     ReactiveFormsModule,
+    Pagination,
   ],
   templateUrl: './comorbidity-list.html',
   styleUrl: './comorbidity-list.css'
@@ -28,6 +30,7 @@ export class ComorbidityList {
   paginatedResponse!: PaginatedResponse<Comorbidity>;
   searchQueryControl: FormControl<string> = new FormControl(this.route.snapshot.queryParams['search'] === undefined ? '' : this.route.snapshot.queryParams['search'].toString());
   currentPage: number = this.route.snapshot.queryParams['page'] === undefined ? 1 : parseInt(this.route.snapshot.queryParams['page']);
+  pageSize: number = 10;
 
   ngOnInit() {
     this.goToPage(this.currentPage);

@@ -1,0 +1,54 @@
+<nav aria-label="Pagination" class="pagination-nav">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <button
+        class="page-link"
+        (click)="goToPage(currentPage - 1)"
+        [disabled]="currentPage === 1"
+        aria-label="Previous page">
+        ‹ Previous
+      </button>
+    </li>
+
+      <li class="page-item" [class.active]="currentPage === 1">
+        <button class="page-link" (click)="goToPage(1)">1</button>
+      </li>
+
+    @if (showStartEllipsis) {
+      <li class="page-item disabled">
+        <span class="page-link">-</span>
+      </li>
+    }
+
+    @for (page of visiblePages; track page) {
+      <li
+        class="page-item"
+        [class.active]="page === currentPage">
+        <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+      </li>
+    }
+
+    @if (showEndEllipsis) {
+      <li class="page-item disabled">
+        <span class="page-link">-</span>
+      </li>
+    }
+
+    @if (totalPages > 1) {
+      <li class="page-item" [class.active]="currentPage === totalPages">
+        <button class="page-link" (click)="goToPage(totalPages)">{{ totalPages }}</button>
+      </li>
+    }
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <button
+        class="page-link"
+        (click)="goToPage(currentPage + 1)"
+        [disabled]="currentPage === totalPages"
+        aria-label="Next page">
+        Next ›
+      </button>
+    </li>
+  </ul>
+
+</nav>
