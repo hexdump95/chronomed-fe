@@ -1,0 +1,54 @@
+<h1>Facility info</h1>
+
+<div>
+  <form [formGroup]="facilityFormGroup" (ngSubmit)="onSubmit()">
+    <div class="input-wrapper">
+      <span class="input-text">Name</span>
+      <input class="input-field" formControlName="name" type="text">
+    </div>
+    <div class="input-wrapper">
+      <span class="input-text">Description</span>
+      <textarea formControlName="description"></textarea>
+    </div>
+    <div class="input-wrapper">
+      <span class="input-text">Tax Identification Number</span>
+      <input class="input-field" formControlName="taxIdentificationNumber" type="text">
+    </div>
+    <div class="input-wrapper">
+      <span class="input-text">Email</span>
+      <input class="input-field" formControlName="email" type="email">
+    </div>
+    <div class="input-wrapper">
+      <span class="input-text">Phone Number</span>
+      <input class="input-field" formControlName="phoneNumber" type="text">
+    </div>
+
+    <br>
+
+    <select formControlName="provinceId" (change)="onChangeUpdateDistricts($event)">
+      @for (province of provinces; track province.id) {
+        <option [value]="province.id">{{ province.name }}</option>
+      }
+    </select>
+
+    <br>
+
+    <select formControlName="districtId" (change)="onChangeUpdateLocalities($event)">
+      @for (district of districts; track district.id) {
+        <option [value]="district.id">{{ district.name }}</option>
+      }
+    </select>
+
+    <br>
+
+    <select formControlName="localityId">
+      @for (locality of localities; track locality.id) {
+        <option [value]="locality.id">{{ locality.name }}</option>
+      }
+    </select>
+    <br>
+
+    <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+    <button class="btn btn-primary" type="submit">{{ facilityId !== null ? 'Update' : 'Create' }}</button>
+  </form>
+</div>

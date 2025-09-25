@@ -1,19 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { SpecialtyService } from '../../../../core/services/specialty.service';
+import { FacilityService } from '../../../../core/services/facility.service';
 import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-specialty-delete-dialog',
+  selector: 'app-facility-delete-dialog',
   imports: [
     ReactiveFormsModule
   ],
-  templateUrl: './specialty-delete-dialog.html',
-  styleUrl: './specialty-delete-dialog.css'
+  templateUrl: './facility-delete-dialog.html',
+  styleUrl: './facility-delete-dialog.css'
 })
-export class SpecialtyDeleteDialog {
-  specialtyService = inject(SpecialtyService);
+export class FacilityDeleteDialog {
+  facilityService = inject(FacilityService);
   toastService = inject(ToastService);
   data = inject(DIALOG_DATA);
   dialogRef = inject<DialogRef<boolean>>(DialogRef<boolean>);
@@ -23,8 +23,8 @@ export class SpecialtyDeleteDialog {
   }
 
   onDelete() {
-    this.specialtyService.deleteSpecialty(this.data.specialty.id).subscribe(_ => {
-      this.toastService.success('Specialty deleted successfully');
+    this.facilityService.deleteFacility(this.data.facility.id).subscribe(_ => {
+      this.toastService.success('Facility deleted successfully');
       this.dialogRef.close(true);
     });
   }

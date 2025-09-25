@@ -1,0 +1,15 @@
+@if (facility) {
+  <h1>{{ facility.name }}</h1>
+  <h2>{{ facility.description }}</h2>
+  <p><b>Tax Identification Number:</b> {{ facility.taxIdentificationNumber }}</p>
+  <p><b>Email:</b> {{ facility.email }}</p>
+  <p><b>Phone Number:</b> {{ facility.phoneNumber }}</p>
+  @if (location) {
+    <p><b>Location:</b> {{ location.name }}, {{ location.districtName }}, {{ location.provinceName }}</p>
+  }
+  <br>
+  <button routerLink='./edit' type="button">Edit</button>
+  <br>
+  <br>
+  <button routerLink="./rooms" type="button">Manage Rooms</button>
+}

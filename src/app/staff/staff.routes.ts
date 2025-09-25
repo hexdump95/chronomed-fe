@@ -18,6 +18,10 @@ const staffRoutes: Routes = [
     path: 'comorbidities',
     loadChildren: () => import(`./components/comorbidities/comorbidity.routes`),
   },
+  {
+    path: 'facilities',
+    loadChildren: () => import(`./components/facilities/facility.routes`),
+  },
 ];
 
 export default staffRoutes;

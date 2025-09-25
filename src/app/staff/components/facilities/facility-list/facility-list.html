@@ -1,0 +1,38 @@
+<button routerLink="./new" class="btn btn-primary">Create new Facility</button>
+<div class="input-wrapper">
+  <span class="input-text">Search: </span>
+  <input class="input-field" [formControl]="searchQueryControl" type="search">
+  <button class="btn" (click)="filterPage()">Filter</button>
+</div>
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <tbody>
+    @if (paginatedResponse) {
+      @for (facility of paginatedResponse.items; track facility.id) {
+        <tr>
+          <td><a routerLink="./{{facility.id}}">{{ facility.name }}</a></td>
+          <td>{{ facility.description }}</td>
+          <td><button (click)="openDeleteFacilityDialog(facility)"><i class="bi bi-trash"></i></button></td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3">
+            There are no items.
+          </td>
+        </tr>
+      }
+    } @else {
+      <tr>
+        <td colspan="3">
+          There are no items.
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
