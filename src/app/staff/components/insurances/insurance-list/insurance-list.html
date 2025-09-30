@@ -9,6 +9,7 @@
   <tr>
     <td>Name</td>
     <td>Description</td>
+    <td>Type</td>
     <td>Actions</td>
   </tr>
   </thead>
@@ -18,7 +19,10 @@
         <tr>
           <td><a routerLink="./{{insurance.id}}">{{ insurance.name }}</a></td>
           <td>{{ insurance.description }}</td>
-          <td><button (click)="openDeleteInsuranceDialog(insurance)"><i class="bi bi-trash"></i></button></td>
+          <td>{{ insurance.insuranceTypeName }}</td>
+          <td>
+            <button (click)="openDeleteInsuranceDialog(insurance)"><i class="bi bi-trash"></i></button>
+          </td>
         </tr>
       } @empty {
         <tr>

@@ -7,14 +7,15 @@ import { Dialog } from '@angular/cdk/dialog';
 import { PaginatedResponse } from '../../../../core/models/response.model';
 import { Insurance } from '../../../../core/models/insurance.model';
 import { InsuranceService } from '../../../../core/services/insurance.service';
+import { InsuranceDeleteDialog } from '../insurance-delete-dialog/insurance-delete-dialog';
 
 @Component({
   selector: 'app-insurance-list',
-    imports: [
-        Pagination,
-        ReactiveFormsModule,
-        RouterLink
-    ],
+  imports: [
+    Pagination,
+    ReactiveFormsModule,
+    RouterLink
+  ],
   templateUrl: './insurance-list.html',
   styleUrl: './insurance-list.css'
 })
@@ -52,16 +53,16 @@ export class InsuranceList {
   }
 
   openDeleteInsuranceDialog(insurance: Insurance) {
-  //   this.dialog.open<boolean>(InsuranceDeleteDialog, {
-  //     minWidth: '300px',
-  //     data: {
-  //       insurance: insurance
-  //     },
-  //     disableClose: true,
-  //   }).closed.subscribe(res => {
-  //     if (res) {
-  //       this.goToPage(this.currentPage);
-  //     }
-  //   });
+    this.dialog.open<boolean>(InsuranceDeleteDialog, {
+      minWidth: '300px',
+      data: {
+        insurance: insurance
+      },
+      disableClose: true,
+    }).closed.subscribe(res => {
+      if (res) {
+        this.goToPage(this.currentPage);
+      }
+    });
   }
 }

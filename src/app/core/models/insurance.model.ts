@@ -2,7 +2,8 @@ export interface Insurance {
   id?: number;
   name: string;
   description: string;
-  insuranceTypeId: number;
+  insuranceTypeId?: number;
+  insuranceTypeName?: string;
   coverages?: InsuranceCoverage[];
 }
 
