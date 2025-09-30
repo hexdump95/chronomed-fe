@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { FacilityList } from './facility-list/facility-list';
 import { FacilityForm } from './facility-form/facility-form';
 import { FacilityDetail } from './facility-detail/facility-detail';
+import { RoomList } from './room-list/room-list';
 
 const facilityRoutes: Routes = [
   {
@@ -19,6 +20,10 @@ const facilityRoutes: Routes = [
   {
     path: ':id/edit',
     component: FacilityForm
+  },
+  {
+    path: ':id/rooms',
+    component: RoomList
   }
 ];
 

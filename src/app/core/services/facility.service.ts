@@ -45,8 +45,31 @@ export class FacilityService {
     return this.http.delete<null>(`${this.apiUrl}/${id}`);
   }
 
+  getRooms(facilityId: number, page: number = 1): Observable<PaginatedResponse<Room>> {
+    return this.http.get<PaginatedResponse<Facility>>(`${this.apiUrl}/${facilityId}/rooms`,
+      {
+        params:
+          {
+            page: page - 1
+          }
+      }
+    );
+  }
+
+  getRoom(roomId: number): Observable<Room> {
+    return this.http.get<Room>(`${this.apiUrl}/rooms/${roomId}`);
+  }
+
   createRoom(facilityId: number, request: Room): Observable<Room> {
     return this.http.post<Room>(`${this.apiUrl}/${facilityId}/rooms`, request);
+  }
+
+  updateRoom(roomId: number, request: Room): Observable<Room> {
+    return this.http.put<Room>(`${this.apiUrl}/rooms/${roomId}`, request);
+  }
+
+  deleteRoom(roomId: number): Observable<Room> {
+    return this.http.delete<Room>(`${this.apiUrl}/rooms/${roomId}`);
   }
 
 }

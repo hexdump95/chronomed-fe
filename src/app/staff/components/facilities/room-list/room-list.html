@@ -1,0 +1,44 @@
+<button (click)="openRoomFormDialog()" class="btn btn-primary">Create new Room</button>
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <tbody>
+    @if (paginatedResponse) {
+      @for (room of paginatedResponse.items; track room.id) {
+        <tr>
+          <td><a (click)="openRoomFormDialog(room)">{{ room.name }}</a></td>
+          <td>{{ room.description }}</td>
+          <td>
+            <button (click)="openDeleteRoomDialog(room)"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3">
+            There are no items.
+          </td>
+        </tr>
+      }
+    } @else {
+      <tr>
+        <td colspan="3">
+          There are no items.
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@if (paginatedResponse) {
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalItems]="paginatedResponse.totalItems"
+    [itemsPerPage]="pageSize"
+    (pageChanged)="onPageChanged($event)">
+  </app-pagination>
+}

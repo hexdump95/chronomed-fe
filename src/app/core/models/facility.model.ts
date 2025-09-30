@@ -12,7 +12,7 @@ export interface Facility {
 
 export interface Room {
   id?: number;
-  validFrom: string;
-  validTo: string;
-  price: number;
+  name: string;
+  description?: string;
+  specialtyIds?: number[];
 }

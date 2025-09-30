@@ -1,0 +1,38 @@
+<div class="dialog">
+  <div class="dialog-title">
+    <h1>Room info</h1>
+    <div class="spacer"></div>
+    <button type="button" (click)="onCancel()" class="btn-dialog-close">&times;</button>
+  </div>
+
+  <div>
+    <form [formGroup]="roomFormGroup" (ngSubmit)="onSubmit()">
+      <div class="input-wrapper">
+        <span class="input-text">Name</span>
+        <input class="input-field" formControlName="name" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Description</span>
+        <textarea formControlName="description"></textarea>
+      </div>
+
+      <br>
+
+      <select (change)="updateSpecialty($event)">
+        <option [defaultSelected]="true"></option>
+        @for (specialty of specialties; track specialty.id) {
+          <option [value]="specialty.id">{{ specialty.name }}</option>
+        }
+      </select>
+
+      <br>
+      @for (specialtyId of selectedSpecialtyIds; track specialtyId) {
+        <app-chip [label]="getSpecialtyName(specialtyId.toString())" (removed)="removeTag(specialtyId)"></app-chip>
+      }
+      <br>
+
+      <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">{{ roomId !== null ? 'Update' : 'Create' }}</button>
+    </form>
+  </div>
+</div>
