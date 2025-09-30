@@ -1,0 +1,5 @@
+<h1>Payment Types</h1>
+@for (type of paymentTypes; track type.id) {
+  {{type.name}} <input value="{{type.active}}" type="checkbox" [disabled]="isPatching" (click)="patchPaymentTypeActive(type.id)">
+  <br>
+}

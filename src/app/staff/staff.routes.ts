@@ -22,6 +22,10 @@ const staffRoutes: Routes = [
     path: 'facilities',
     loadChildren: () => import(`./components/facilities/facility.routes`),
   },
+  {
+    path: 'payments',
+    loadChildren: () => import(`./components/payments/payment.routes`),
+  },
 ];
 
 export default staffRoutes;
