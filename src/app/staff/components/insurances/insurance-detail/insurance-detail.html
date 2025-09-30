@@ -1,0 +1,35 @@
+@if (insurance) {
+  <h1>{{ insurance.name }}</h1>
+  <h2>{{ insurance.description }}</h2>
+  <p><b>Type: </b> {{ insurance.insuranceTypeName }}</p>
+  <br>
+  <button routerLink='./edit' type="button">Edit</button>
+  <br>
+  <br>
+  <p>Coverage history:</p>
+  <button (click)="openCreateCoverageDialog()" type="button">Add new Coverage</button>
+  <table>
+    <thead>
+    <tr>
+      <td>Valid from</td>
+      <td>Valid to</td>
+      <td>Price</td>
+    </tr>
+    </thead>
+    <tbody>
+      @for (coverage of insurance.coverages; track coverage.id) {
+        <tr>
+          <td>{{ coverage.validFrom | date: 'y-MM-dd' }}</td>
+          <td>{{ coverage.validTo | date: 'y-MM-dd' }}</td>
+          <td>{{ coverage.amount }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3">
+            There are no items.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
