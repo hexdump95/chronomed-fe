@@ -2,8 +2,9 @@ import { Component, inject } from '@angular/core';
 import { InsuranceService } from '../../../../core/services/insurance.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Dialog } from '@angular/cdk/dialog';
-import { Insurance } from '../../../../core/models/insurance.model';
+import { Insurance, InsuranceCoverage } from '../../../../core/models/insurance.model';
 import { DatePipe } from '@angular/common';
+import { CoverageFormDialog } from '../coverage-form-dialog/coverage-form-dialog';
 
 @Component({
   selector: 'app-insurance-detail',
@@ -29,6 +30,17 @@ export class InsuranceDetail {
   }
 
   openCreateCoverageDialog() {
+    this.dialog.open<InsuranceCoverage>(CoverageFormDialog, {
+      minWidth: '300px',
+      data: {
+        insuranceId: this.insurance.id
+      },
+      disableClose: true
+    }).closed.subscribe(res => {
+      if (res) {
+        this.insurance.coverages!.push(res);
+      }
+    });
   }
 
 }

@@ -1,0 +1,27 @@
+<div class="dialog">
+  <div class="dialog-title">
+    <h1>New coverage</h1>
+    <div class="spacer"></div>
+    <button type="button" (click)="onCancel()" class="btn-dialog-close">&times;</button>
+  </div>
+
+  <div>
+    <form [formGroup]="coverageFormGroup" (ngSubmit)="onSubmit()">
+      <div class="input-wrapper">
+        <span class="input-text">Valid from</span>
+        <input class="input-field" formControlName="validFrom" type="date">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Valid to</span>
+        <input class="input-field" formControlName="validTo" type="date">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Amount</span>
+        <input class="input-field" formControlName="amount" type="number">
+      </div>
+
+      <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">Create</button>
+    </form>
+  </div>
+</div>

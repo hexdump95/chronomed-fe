@@ -8,7 +8,7 @@ export interface Insurance {
 }
 
 export interface InsuranceCoverage {
-  id: number;
+  id?: number;
   validFrom: string;
   validTo: string;
   amount: number;
