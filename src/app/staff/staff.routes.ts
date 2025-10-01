@@ -30,6 +30,10 @@ const staffRoutes: Routes = [
     path: 'insurances',
     loadChildren: () => import(`./components/insurances/insurance.routes`),
   },
+  {
+    path: 'profile',
+    loadChildren: () => import(`./components/profile/profile.routes`),
+  },
 ];
 
 export default staffRoutes;

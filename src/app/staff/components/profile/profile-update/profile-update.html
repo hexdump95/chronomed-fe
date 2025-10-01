@@ -1,0 +1,60 @@
+<h1>Profile info</h1>
+
+@if (staffProfile) {
+  <div>
+    <form [formGroup]="staffProfileFormGroup" (ngSubmit)="onSubmit()">
+      <div class="input-wrapper">
+        <span class="input-text">First name</span>
+        <input disabled class="input-field" value="{{staffProfile.firstName}}" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Last name</span>
+        <input disabled class="input-field" value="{{staffProfile.lastName}}" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Username</span>
+        <input disabled class="input-field" value="{{staffProfile.username}}" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">File number</span>
+        <input disabled class="input-field" value="{{staffProfile.fileNumber}}" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Email</span>
+        <input class="input-field" formControlName="email" type="email">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Phone Number</span>
+        <input class="input-field" formControlName="phoneNumber" type="text">
+      </div>
+
+      <br>
+
+      <select formControlName="provinceId" (change)="onChangeUpdateDistricts($event)">
+        @for (province of provinces; track province.id) {
+          <option [value]="province.id">{{ province.name }}</option>
+        }
+      </select>
+
+      <br>
+
+      <select formControlName="districtId" (change)="onChangeUpdateLocalities($event)">
+        @for (district of districts; track district.id) {
+          <option [value]="district.id">{{ district.name }}</option>
+        }
+      </select>
+
+      <br>
+
+      <select formControlName="localityId">
+        @for (locality of localities; track locality.id) {
+          <option [value]="locality.id">{{ locality.name }}</option>
+        }
+      </select>
+      <br>
+
+      <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+  </div>
+}
