@@ -13,3 +13,8 @@ export interface InsuranceCoverage {
   validTo: string;
   amount: number;
 }
+
+export interface InsuranceType {
+  id: number;
+  name: string;
+}

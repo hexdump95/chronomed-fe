@@ -1,0 +1,27 @@
+<p>profile-insurance works!</p>
+
+<form (ngSubmit)="onSubmit()">
+  <select (change)="onChangeUpdateInsurances($event)">
+    <option value=""></option>
+    @for (type of insuranceTypes; track type.id) {
+      <option [value]="type.id">{{ type.name }}</option>
+    }
+  </select>
+
+
+  <select (change)="updateInsurance($event)">
+    <option [defaultSelected]="true"></option>
+    @for (insurance of insurances; track insurance.id) {
+      <option [value]="insurance.id">{{ insurance.name }}</option>
+    }
+  </select>
+
+  <br>
+  @for (insurance of selectedInsurances; track insurance.id) {
+    <app-chip [label]="insurance.name" (removed)="removeTag(insurance.id!)"/>
+  }
+  <br>
+
+  <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+  <button class="btn btn-primary" type="submit">Update</button>
+</form>

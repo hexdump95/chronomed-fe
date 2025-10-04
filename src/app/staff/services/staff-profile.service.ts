@@ -19,4 +19,12 @@ export class StaffProfileService {
     return this.http.put<StaffProfile>(`${this.apiUrl}`, request);
   }
 
+  getInsuranceIds(): Observable<number[]> {
+    return this.http.get<number[]>(`${this.apiUrl}/insurances`);
+  }
+
+  updateInsurances(insuranceIds: number[]): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/insurances`, insuranceIds);
+  }
+
 }

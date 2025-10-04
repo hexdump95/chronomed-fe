@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Insurance, InsuranceCoverage } from '../models/insurance.model';
+import { Insurance, InsuranceCoverage, InsuranceType } from '../models/insurance.model';
 import { PaginatedResponse } from '../models/response.model';
 
 @Injectable({
@@ -25,8 +25,8 @@ export class InsuranceService {
     );
   }
 
-  getAllInsurances(): Observable<Insurance[]> {
-    return this.http.get<Insurance[]>(`${this.apiUrl}/all`);
+  getAllInsurancesByType(insuranceTypeId: number): Observable<Insurance[]> {
+    return this.http.get<Insurance[]>(`${this.apiUrl}/all?insuranceTypeId=${insuranceTypeId}`);
   }
 
   getInsurance(id: number): Observable<Insurance> {
@@ -47,6 +47,14 @@ export class InsuranceService {
 
   createCoverage(insuranceId: number, request: InsuranceCoverage): Observable<InsuranceCoverage> {
     return this.http.post<InsuranceCoverage>(`${this.apiUrl}/${insuranceId}/coverages`, request);
+  }
+
+  getAllInsuranceTypes(): Observable<InsuranceType[]> {
+    return this.http.get<InsuranceType[]>(`${this.apiUrl}/types/all`);
+  }
+
+  getInsurancesByIds(insuranceIds: number[]): Observable<Insurance[]> {
+    return this.http.get<Insurance[]>(`${this.apiUrl}/byIds?insuranceIds=${insuranceIds}`);
   }
 
 }
