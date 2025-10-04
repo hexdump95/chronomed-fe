@@ -5,6 +5,7 @@ import { InsuranceService } from '../../../../core/services/insurance.service';
 import { StaffProfileService } from '../../../services/staff-profile.service';
 import { Chip } from '../../../../shared/ui/chip/chip';
 import { ToastService } from '../../../../core/services/toast.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-insurance',
@@ -20,6 +21,8 @@ export class ProfileInsurance {
   insuranceService = inject(InsuranceService);
   staffProfileService = inject(StaffProfileService);
   toastService = inject(ToastService);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
 
   insuranceTypes: InsuranceType[] = [];
   insurances: Insurance[] = [];
@@ -53,7 +56,7 @@ export class ProfileInsurance {
     if (!this.selectedInsurances.map(x => x.id).includes(parseInt(event.target.value))) {
       this.insuranceService.getInsurancesByIds([event.target.value]).subscribe(res => {
         this.selectedInsurances.push(res[0]);
-      })
+      });
     }
   }
 
@@ -62,7 +65,7 @@ export class ProfileInsurance {
   }
 
   onCancel() {
-
+    void this.router.navigate(['..'], {relativeTo: this.route});
   }
 
   onSubmit() {
