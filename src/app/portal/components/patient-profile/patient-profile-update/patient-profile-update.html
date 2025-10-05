@@ -1,0 +1,53 @@
+<h1>Profile info</h1>
+
+@if (patientProfile) {
+  <div>
+    <form [formGroup]="patientProfileFormGroup" (ngSubmit)="onSubmit()">
+      <div class="input-wrapper">
+        <span class="input-text">First name</span>
+        <input disabled class="input-field" value="{{patientProfile.firstName}}" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Last name</span>
+        <input disabled class="input-field" value="{{patientProfile.lastName}}" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">CUIL</span>
+        <input disabled class="input-field" value="{{patientProfile.username}}" type="text">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Document</span>
+        <input class="input-field" formControlName="identityDocument" type="text">
+      </div>
+      <select formControlName="documentTypeId">
+        @for (type of documentTypes; track type.id) {
+          <option [value]="type.id">{{ type.name }}</option>
+        }
+      </select>
+      <div class="input-wrapper">
+        <span class="input-text">Date of Birth</span>
+        <input class="input-field" formControlName="dateOfBirth" type="date">
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Sex</span>
+        <select formControlName="sexId">
+          @for (sex of sexList; track sex.id) {
+            <option [value]="sex.id">{{ sex.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="input-wrapper">
+        <span class="input-text">Self-perceived identity</span>
+        <select formControlName="selfPerceivedIdentityId">
+          @for (selfPerceivedIdentity of selfPerceivedIdentities; track selfPerceivedIdentity.id) {
+            <option [value]="selfPerceivedIdentity.id">{{ selfPerceivedIdentity.name }}</option>
+          }
+        </select>
+      </div>
+
+
+      <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+  </div>
+}
