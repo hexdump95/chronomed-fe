@@ -1,0 +1,46 @@
+<h1>Domicile info</h1>
+
+<div>
+  <form [formGroup]="domicileFormGroup" (ngSubmit)="onSubmit()">
+    <div class="input-wrapper">
+      <span class="input-text">Street</span>
+      <input class="input-field" formControlName="street" type="text">
+    </div>
+    <div class="input-wrapper">
+      <span class="input-text">Number</span>
+      <input class="input-field" formControlName="street" type="number">
+    </div>
+    <div class="input-wrapper">
+      <span class="input-text">Floor</span>
+      <input class="input-field" formControlName="floor" type="number">
+    </div>
+
+    <br>
+
+    <select formControlName="provinceId" (change)="onChangeUpdateDistricts($event)">
+      @for (province of provinces; track province.id) {
+        <option [value]="province.id">{{ province.name }}</option>
+      }
+    </select>
+
+    <br>
+
+    <select formControlName="districtId" (change)="onChangeUpdateLocalities($event)">
+      @for (district of districts; track district.id) {
+        <option [value]="district.id">{{ district.name }}</option>
+      }
+    </select>
+
+    <br>
+
+    <select formControlName="localityId">
+      @for (locality of localities; track locality.id) {
+        <option [value]="locality.id">{{ locality.name }}</option>
+      }
+    </select>
+    <br>
+
+    <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+    <button class="btn btn-primary" type="submit">Update</button>
+  </form>
+</div>

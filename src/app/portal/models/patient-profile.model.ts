@@ -23,3 +23,10 @@ export interface DocumentType {
   id: number;
   name: string;
 }
+
+export interface Domicile {
+  street: string;
+  number: number;
+  floor: number;
+  localityId: number;
+}
