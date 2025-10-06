@@ -1,0 +1,11 @@
+<h1>Comorbidities</h1>
+
+@for (comorbidity of comorbidities; track comorbidity.comorbidity.id) {
+  <div>{{ comorbidity.comorbidity.name }} {{ comorbidity.active }}
+    <input
+      [checked]="comorbidity.active"
+      (click)="onClickSelectedComorbidity(comorbidity.comorbidity.id!)"
+      type="checkbox">
+  </div>
+}
+<button type="button" (click)="onSubmit()">Update</button>

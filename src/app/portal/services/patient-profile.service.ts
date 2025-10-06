@@ -27,6 +27,14 @@ export class PatientProfileService {
     return this.http.put<Domicile>(`${this.apiUrl}/domicile`, request);
   }
 
+  getComorbidities(): Observable<number[]> {
+    return this.http.get<number[]>(`${this.apiUrl}/comorbidities`);
+  }
+
+  updateComorbidities(comorbidityIds: number[]): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/comorbidities`, comorbidityIds)
+  }
+
   getSex(): Observable<Sex[]> {
     return this.http.get<Sex[]>(`${this.apiUrl}/sex`);
   }
