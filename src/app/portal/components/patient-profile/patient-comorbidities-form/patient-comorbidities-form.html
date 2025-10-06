@@ -1,7 +1,7 @@
 <h1>Comorbidities</h1>
 
 @for (comorbidity of comorbidities; track comorbidity.comorbidity.id) {
-  <div>{{ comorbidity.comorbidity.name }} {{ comorbidity.active }}
+  <div>{{ comorbidity.comorbidity.name }}
     <input
       [checked]="comorbidity.active"
       (click)="onClickSelectedComorbidity(comorbidity.comorbidity.id!)"
