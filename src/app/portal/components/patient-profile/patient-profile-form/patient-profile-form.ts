@@ -7,14 +7,14 @@ import { DocumentType, PatientProfile, SelfPerceivedIdentity, Sex } from '../../
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-patient-profile-update',
+  selector: 'app-patient-profile-form',
   imports: [
     ReactiveFormsModule
   ],
-  templateUrl: './patient-profile-update.html',
-  styleUrl: './patient-profile-update.css'
+  templateUrl: './patient-profile-form.html',
+  styleUrl: './patient-profile-form.css'
 })
-export class PatientProfileUpdate {
+export class PatientProfileForm {
   patientProfileService = inject(PatientProfileService);
   fb = inject(FormBuilder);
   route = inject(ActivatedRoute);

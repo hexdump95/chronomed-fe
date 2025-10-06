@@ -8,15 +8,15 @@ import { PatientProfileService } from '../../../services/patient-profile.service
 import { Domicile } from '../../../models/patient-profile.model';
 
 @Component({
-  selector: 'app-patient-domicile-update',
+  selector: 'app-patient-domicile-form',
     imports: [
         FormsModule,
         ReactiveFormsModule
     ],
-  templateUrl: './patient-domicile-update.html',
-  styleUrl: './patient-domicile-update.css'
+  templateUrl: './patient-domicile-form.html',
+  styleUrl: './patient-domicile-form.css'
 })
-export class PatientDomicileUpdate {
+export class PatientDomicileForm {
   patientProfileService = inject(PatientProfileService);
   fb = inject(FormBuilder);
   route = inject(ActivatedRoute);

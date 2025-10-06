@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { PatientProfileUpdate } from './patient-profile-update/patient-profile-update';
-import { PatientDomicileUpdate } from './patient-domicile-update/patient-domicile-update';
+import { PatientProfileForm } from './patient-profile-form/patient-profile-form';
+import { PatientDomicileForm } from './patient-domicile-form/patient-domicile-form';
 import { PatientComorbiditiesForm } from './patient-comorbidities-form/patient-comorbidities-form';
 
 const patientProfileRoutes: Routes = [
   {
     path: '',
-    component: PatientProfileUpdate
+    component: PatientProfileForm
   },
   {
     path: 'domicile',
-    component: PatientDomicileUpdate
+    component: PatientDomicileForm
   },
   {
     path: 'comorbidities',
