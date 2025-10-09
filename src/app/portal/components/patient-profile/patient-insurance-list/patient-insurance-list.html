@@ -1,0 +1,24 @@
+<button (click)="openPatientInsuranceFormDialog()" class="btn btn-primary">Add Insurance</button>
+<table>
+  <thead>
+  <tr>
+    <td>Insurance</td>
+    <td>Affiliate number</td>
+    <td>Type</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <tbody>
+    @for (insurance of patientInsurances; track insurance.insuranceId) {
+      <tr>
+        <td>{{ insurance.name }}</td>
+        <td>{{ insurance.affiliateNumber }}</td>
+        <td>{{ insurance.insuranceTypeName }}</td>
+        <td>
+          <button (click)="openDeletePatientInsuranceDialog(insurance)"><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+

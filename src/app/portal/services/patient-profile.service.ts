@@ -2,7 +2,15 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { DocumentType, Domicile, PatientProfile, SelfPerceivedIdentity, Sex } from '../models/patient-profile.model';
+import {
+  DocumentType,
+  Domicile,
+  PatientInsurance,
+  PatientProfile,
+  SelfPerceivedIdentity,
+  Sex
+} from '../models/patient-profile.model';
+import { Insurance } from '../../core/models/insurance.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +40,11 @@ export class PatientProfileService {
   }
 
   updateComorbidities(comorbidityIds: number[]): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/comorbidities`, comorbidityIds)
+    return this.http.put<void>(`${this.apiUrl}/comorbidities`, comorbidityIds);
+  }
+
+  getInsurances(): Observable<PatientInsurance[]> {
+    return this.http.get<PatientInsurance[]>(`${this.apiUrl}/insurances`);
   }
 
   getSex(): Observable<Sex[]> {

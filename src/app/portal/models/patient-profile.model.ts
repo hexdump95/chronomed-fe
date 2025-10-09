@@ -30,3 +30,10 @@ export interface Domicile {
   floor: number;
   localityId: number;
 }
+
+export interface PatientInsurance {
+  name?: string;
+  insuranceTypeName?: string;
+  affiliateNumber: number;
+  insuranceId: number;
+}
