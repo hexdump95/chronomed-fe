@@ -6,6 +6,7 @@ import { Insurance } from '../../../../core/models/insurance.model';
 import { ActivatedRoute } from '@angular/router';
 import { Dialog } from '@angular/cdk/dialog';
 import { PatientInsuranceFormDialog } from '../patient-insurance-form-dialog/patient-insurance-form-dialog';
+import { PatientInsuranceDeleteDialog } from '../patient-insurance-delete-dialog/patient-insurance-delete-dialog';
 
 @Component({
   selector: 'app-patient-insurance-list',
@@ -53,7 +54,17 @@ export class PatientInsuranceList {
     });
   }
 
-  openDeletePatientInsuranceDialog(insurance: PatientInsurance) {
-
+  openDeletePatientInsuranceDialog(patientInsurance: PatientInsurance) {
+    this.dialog.open<boolean>(PatientInsuranceDeleteDialog, {
+      minWidth: '300px',
+      data: {
+        patientInsurance
+      },
+      disableClose: true,
+    }).closed.subscribe(res => {
+      if (res) {
+        this.loadInsurances();
+      }
+    });
   }
 }
