@@ -9,9 +9,9 @@
   </tr>
   </thead>
   <tbody>
-    @for (insurance of patientInsurances; track insurance.insuranceId) {
+    @for (insurance of patientInsurances; track insurance.id) {
       <tr>
-        <td>{{ insurance.name }}</td>
+        <td><a (click)="openPatientInsuranceFormDialog(insurance)">{{ insurance.name }}</a></td>
         <td>{{ insurance.affiliateNumber }}</td>
         <td>{{ insurance.insuranceTypeName }}</td>
         <td>

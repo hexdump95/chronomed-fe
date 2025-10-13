@@ -47,6 +47,14 @@ export class PatientProfileService {
     return this.http.get<PatientInsurance[]>(`${this.apiUrl}/insurances`);
   }
 
+  createPatientInsurance(patientInsurance: PatientInsurance): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/insurances`, patientInsurance);
+  }
+
+  updatePatientInsurance(id: number, patientInsurance: PatientInsurance): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/insurances/${id}`, patientInsurance);
+  }
+
   getSex(): Observable<Sex[]> {
     return this.http.get<Sex[]>(`${this.apiUrl}/sex`);
   }

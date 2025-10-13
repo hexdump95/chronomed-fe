@@ -32,6 +32,7 @@ export interface Domicile {
 }
 
 export interface PatientInsurance {
+  id?: number;
   name?: string;
   insuranceTypeName?: string;
   affiliateNumber: number;

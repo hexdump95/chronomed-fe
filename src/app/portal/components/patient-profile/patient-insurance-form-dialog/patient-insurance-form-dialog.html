@@ -1,0 +1,35 @@
+<div class="dialog">
+  <div class="dialog-title">
+    <h1>Insurance info</h1>
+    <div class="spacer"></div>
+    <button type="button" (click)="onCancel()" class="btn-dialog-close">&times;</button>
+  </div>
+
+  <div>
+    <form [formGroup]="patientInsuranceFormGroup" (ngSubmit)="onSubmit()">
+
+      <select formControlName="insuranceTypeId" (change)="onChangeUpdateInsurances($event)">
+        @for (type of insuranceTypes; track type.id) {
+          <option [value]="type.id">{{ type.name }}</option>
+        }
+      </select>
+
+      <br>
+
+      <select formControlName="insuranceId">
+        @for (insurance of insurances; track insurance.id) {
+          <option [value]="insurance.id">{{ insurance.name }}</option>
+        }
+      </select>
+      <br>
+
+      <div class="input-wrapper">
+        <span class="input-text">Affiliate Number</span>
+        <input class="input-field" formControlName="affiliateNumber" type="text">
+      </div>
+
+      <button class="btn btn-danger" (click)="onCancel()" type="button">Cancel</button>
+      <button class="btn btn-primary" type="submit">{{ patientInsuranceId !== null ? 'Update' : 'Create' }}</button>
+    </form>
+  </div>
+</div>
